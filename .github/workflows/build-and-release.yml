@@ -21,10 +21,11 @@ jobs:
         sudo snap install dotnet-sdk --classic
         sudo ln -s /snap/dotnet-sdk/current/dotnet /usr/bin/dotnet
 
-    - name: Set up Kotlin
-      uses: fwcd/setup-kotlin@v1
-      with:
-        version: 1.8.10
+    - name: Set up Kotlin manually
+      run: |
+        curl -L -o kotlin.zip https://github.com/JetBrains/kotlin/releases/download/v1.8.10/kotlin-compiler-1.8.10.zip
+        unzip kotlin.zip -d $HOME/kotlin
+        echo "$HOME/kotlin/kotlinc/bin" >> $GITHUB_PATH
 
     - name: Create build folder
       run: mkdir -p build
@@ -54,8 +55,8 @@ jobs:
           dotnet publish "$proj" -c Release -o build/$name
         done
 
-    # ==== Prebuilt .jar 복사 ====
-    - name: Copy existing .jar
+    # ==== Copy existing .jar ====
+    - name: Copy prebuilt .jar files
       run: |
         find DesignPattern -name "*.jar" | while read file; do
           cp "$file" build/
