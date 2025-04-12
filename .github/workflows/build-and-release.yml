@@ -14,39 +14,43 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Install dependencies
+    - name: Install dependencies (only if not already installed)
       run: |
         sudo apt update
-        sudo apt install -y g++ zip openjdk-17-jdk kotlin wget apt-transport-https
-
-        # Install .NET SDK (stable alternative to Snap)
-        wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-        sudo dpkg -i packages-microsoft-prod.deb
-        rm packages-microsoft-prod.deb
-        sudo apt update
-        sudo apt install -y dotnet-sdk-7.0
+        if ! command -v g++ > /dev/null; then
+          sudo apt install -y g++
+        fi
+        if ! command -v zip > /dev/null; then
+          sudo apt install -y zip
+        fi
+        if ! command -v javac > /dev/null; then
+          sudo apt install -y openjdk-17-jdk
+        fi
+        if ! command -v kotlinc > /dev/null; then
+          sudo apt install -y kotlin
+        fi
 
     - name: Create build folder
       run: mkdir -p build
 
-    # ==== Build C++ files ====
-    - name: Compile C++ files
+    # ==== C++ 빌드 ====
+    - name: Build C++ files
       run: |
         find DesignPattern -name "*.cpp" | while read file; do
           name=$(basename "$file" .cpp)
           g++ "$file" -o "build/${name}_cpp.out"
         done
 
-    # ==== Build Kotlin files ====
-    - name: Compile Kotlin files
+    # ==== Kotlin 빌드 ====
+    - name: Build Kotlin files
       run: |
         find DesignPattern -name "*.kt" | while read file; do
           name=$(basename "$file" .kt)
           kotlinc "$file" -include-runtime -d "build/${name}_kt.jar"
         done
 
-    # ==== Build C# .csproj files ====
-    - name: Compile C# projects
+    # ==== C# 빌드 ====
+    - name: Build C# projects
       run: |
         find DesignPattern -name "*.csproj" | while read proj; do
           dir=$(dirname "$proj")
@@ -54,18 +58,18 @@ jobs:
           dotnet publish "$proj" -c Release -o build/$name
         done
 
-    # ==== Copy existing .jar files ====
-    - name: Copy prebuilt .jar files
+    # ==== 미리 빌드된 JAR 복사 ====
+    - name: Copy existing .jar files
       run: |
         find DesignPattern -name "*.jar" | while read file; do
           cp "$file" build/
         done
 
-    # ==== Create zip file ====
-    - name: Zip compiled outputs
+    # ==== 압축 ====
+    - name: Zip build outputs
       run: zip -r build_artifacts.zip build/
 
-    # ==== Release ====
+    # ==== GitHub 릴리즈 ====
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       if: github.event_name == 'push'
