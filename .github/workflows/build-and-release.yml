@@ -17,33 +17,36 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y g++ zip openjdk-17-jdk kotlin
-        sudo snap install dotnet-sdk --classic
-        if [ ! -e /usr/bin/dotnet ]; then
-          sudo ln -s /snap/dotnet-sdk/current/dotnet /usr/bin/dotnet
-        fi
+        sudo apt install -y g++ zip openjdk-17-jdk kotlin wget apt-transport-https
+
+        # Install .NET SDK (stable alternative to Snap)
+        wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+        sudo dpkg -i packages-microsoft-prod.deb
+        rm packages-microsoft-prod.deb
+        sudo apt update
+        sudo apt install -y dotnet-sdk-7.0
 
     - name: Create build folder
       run: mkdir -p build
 
-    # C++ 빌드
-    - name: Build C++ files
+    # ==== Build C++ files ====
+    - name: Compile C++ files
       run: |
         find DesignPattern -name "*.cpp" | while read file; do
           name=$(basename "$file" .cpp)
           g++ "$file" -o "build/${name}_cpp.out"
         done
 
-    # Kotlin 빌드
-    - name: Build Kotlin files
+    # ==== Build Kotlin files ====
+    - name: Compile Kotlin files
       run: |
         find DesignPattern -name "*.kt" | while read file; do
           name=$(basename "$file" .kt)
           kotlinc "$file" -include-runtime -d "build/${name}_kt.jar"
         done
 
-    # C# 빌드
-    - name: Build C# projects
+    # ==== Build C# .csproj files ====
+    - name: Compile C# projects
       run: |
         find DesignPattern -name "*.csproj" | while read proj; do
           dir=$(dirname "$proj")
@@ -51,21 +54,23 @@ jobs:
           dotnet publish "$proj" -c Release -o build/$name
         done
 
-    # 기존 .jar 복사
-    - name: Copy prebuilt JARs
+    # ==== Copy existing .jar files ====
+    - name: Copy prebuilt .jar files
       run: |
         find DesignPattern -name "*.jar" | while read file; do
           cp "$file" build/
         done
 
-    - name: Zip build result
+    # ==== Create zip file ====
+    - name: Zip compiled outputs
       run: zip -r build_artifacts.zip build/
 
+    # ==== Release ====
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       if: github.event_name == 'push'
       with:
-        name: Auto Release ${{ github.run_number }}
+        name: Auto Release - ${{ github.sha }}
         tag_name: release-${{ github.run_number }}
         files: build_artifacts.zip
       env:
