@@ -14,24 +14,26 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Install dependencies (only if not already installed)
+    - name: Install dependencies
       run: |
         sudo apt update
-        if ! command -v g++ > /dev/null; then
-          sudo apt install -y g++
-        fi
-        if ! command -v zip > /dev/null; then
-          sudo apt install -y zip
-        fi
-        if ! command -v javac > /dev/null; then
-          sudo apt install -y openjdk-17-jdk
-        fi
-        if ! command -v kotlinc > /dev/null; then
-          sudo apt install -y kotlin
+        sudo apt install -y g++ zip openjdk-17-jdk kotlin
+        if ! command -v dotnet &> /dev/null; then
+          sudo snap install dotnet-sdk --classic
         fi
 
     - name: Create build folder
       run: mkdir -p build
+
+    # 디버깅: 모든 빌드 대상 파일 출력
+    - name: Debug - List all source files
+      run: |
+        echo "C++ files:"
+        find DesignPattern -name "*.cpp"
+        echo "Kotlin files:"
+        find DesignPattern -name "*.kt"
+        echo "C# projects:"
+        find DesignPattern -name "*.csproj"
 
     # ==== C++ 빌드 ====
     - name: Build C++ files
@@ -58,18 +60,22 @@ jobs:
           dotnet publish "$proj" -c Release -o build/$name
         done
 
-    # ==== 미리 빌드된 JAR 복사 ====
-    - name: Copy existing .jar files
+    # ==== 미리 빌드된 JAR 파일 복사 ====
+    - name: Copy prebuilt .jar files
       run: |
         find DesignPattern -name "*.jar" | while read file; do
           cp "$file" build/
         done
 
-    # ==== 압축 ====
-    - name: Zip build outputs
+    # 디버깅: build 폴더 안에 뭐가 있는지 확인
+    - name: Debug - List build folder
+      run: ls -R build
+
+    # ==== ZIP 압축 ====
+    - name: Zip build artifacts
       run: zip -r build_artifacts.zip build/
 
-    # ==== GitHub 릴리즈 ====
+    # ==== 릴리즈 생성 ====
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       if: github.event_name == 'push'
@@ -79,6 +85,3 @@ jobs:
         files: build_artifacts.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-        
