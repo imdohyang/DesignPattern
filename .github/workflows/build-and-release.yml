@@ -17,20 +17,16 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y g++ zip openjdk-17-jdk
+        sudo apt install -y g++ zip openjdk-17-jdk kotlin
         sudo snap install dotnet-sdk --classic
-        sudo ln -s /snap/dotnet-sdk/current/dotnet /usr/bin/dotnet
-
-    - name: Set up Kotlin manually
-      run: |
-        curl -L -o kotlin.zip https://github.com/JetBrains/kotlin/releases/download/v1.8.10/kotlin-compiler-1.8.10.zip
-        unzip kotlin.zip -d $HOME/kotlin
-        echo "$HOME/kotlin/kotlinc/bin" >> $GITHUB_PATH
+        if [ ! -e /usr/bin/dotnet ]; then
+          sudo ln -s /snap/dotnet-sdk/current/dotnet /usr/bin/dotnet
+        fi
 
     - name: Create build folder
       run: mkdir -p build
 
-    # ==== C++ ====
+    # ==== C++ 빌드 ====
     - name: Build C++ files
       run: |
         find DesignPattern -name "*.cpp" | while read file; do
@@ -38,7 +34,7 @@ jobs:
           g++ "$file" -o "build/${name}_cpp.out"
         done
 
-    # ==== Kotlin ====
+    # ==== Kotlin 빌드 ====
     - name: Build Kotlin files
       run: |
         find DesignPattern -name "*.kt" | while read file; do
@@ -46,8 +42,8 @@ jobs:
           kotlinc "$file" -include-runtime -d "build/${name}_kt.jar"
         done
 
-    # ==== C# ====
-    - name: Build C# .csproj apps
+    # ==== C# 빌드 ====
+    - name: Build C# projects
       run: |
         find DesignPattern -name "*.csproj" | while read proj; do
           dir=$(dirname "$proj")
@@ -55,18 +51,18 @@ jobs:
           dotnet publish "$proj" -c Release -o build/$name
         done
 
-    # ==== Copy existing .jar ====
-    - name: Copy prebuilt .jar files
+    # ==== 미리 빌드된 JAR 복사 ====
+    - name: Copy existing .jar files
       run: |
         find DesignPattern -name "*.jar" | while read file; do
           cp "$file" build/
         done
 
-    # ==== 압축 ====
+    # ==== zip 압축 ====
     - name: Zip build outputs
       run: zip -r build_artifacts.zip build/
 
-    # ==== 릴리즈 ====
+    # ==== GitHub 릴리즈 생성 ====
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       if: github.event_name == 'push'
