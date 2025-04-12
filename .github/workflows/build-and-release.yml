@@ -64,7 +64,7 @@ jobs:
     # C++ 빌드
     - name: Build C++ files
       run: |
-        find DesignPattern -name "*.cpp" | while read file; do
+        find -name "*.cpp" | while read file; do
           name=$(basename "$file" .cpp)
           g++ "$file" -o "build/${name}_cpp.out"
         done
@@ -72,7 +72,7 @@ jobs:
     # Kotlin 빌드
     - name: Build Kotlin files
       run: |
-        find DesignPattern -name "*.kt" | while read file; do
+        find -name "*.kt" | while read file; do
           name=$(basename "$file" .kt)
           kotlinc "$file" -include-runtime -d "build/${name}_kt.jar"
         done
@@ -80,21 +80,21 @@ jobs:
     # C# 빌드
     - name: Build C# projects
       run: |
-        find DesignPattern -name "*.csproj" | while read proj; do
+        find -name "*.csproj" | while read proj; do
           dir=$(dirname "$proj")
           name=$(basename "$dir")
           dotnet publish "$proj" -c Release -o build/$name
         done
 
-    # 기존 .jar 복사 (중복 제외)
-    - name: Copy existing .jar files
-      run: |
-        find . -name "*.jar" | while read file; do
-          dest="build/$(basename "$file")"
-          if [ "$file" != "$dest" ]; then
-            cp "$file" "$dest"
-          fi
-        done
+    # # 기존 .jar 복사 (중복 제외)
+    # - name: Copy existing .jar files
+    #   run: |
+    #     find . -name "*.jar" | while read file; do
+    #       dest="build/$(basename "$file")"
+    #       if [ "$file" != "$dest" ]; then
+    #         cp "$file" "$dest"
+    #       fi
+    #     done
 
     # 압축
     - name: Zip build outputs
