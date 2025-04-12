@@ -14,66 +14,93 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Install dependencies (if not already installed)
+    # 필수 패키지 설치 (이미 설치된 경우 생략)
+    - name: Install dependencies
       run: |
         sudo apt update
+
+        # Check and install g++
         if ! command -v g++ &> /dev/null; then
+          echo "Installing g++..."
           sudo apt install -y g++
         fi
+
+        # Check and install zip
         if ! command -v zip &> /dev/null; then
+          echo "Installing zip..."
           sudo apt install -y zip
         fi
-        if ! command -v kotlinc &> /dev/null; then
-          sudo apt install -y kotlin
-        fi
+
+        # Check and install Java
         if ! command -v java &> /dev/null; then
+          echo "Installing OpenJDK..."
           sudo apt install -y openjdk-17-jdk
         fi
+
+        # Check and install Kotlin
+        if ! command -v kotlinc &> /dev/null; then
+          echo "Installing Kotlin..."
+          sudo apt install -y kotlin
+        fi
+
+        # Check and install dotnet
         if ! command -v dotnet &> /dev/null; then
+          echo "Installing .NET SDK..."
           sudo snap install dotnet-sdk --classic
           sudo ln -s /snap/dotnet-sdk/current/dotnet /usr/bin/dotnet || true
         fi
 
+    # 빌드 결과 저장 폴더 생성
     - name: Create build folder
       run: mkdir -p build
 
-    # ==== C++ 빌드 ====
+    # 디버그: 소스 파일 확인
+    - name: Debug - List source files
+      run: |
+        echo "C++ files:" && find . -name "*.cpp" || true
+        echo "Kotlin files:" && find . -name "*.kt" || true
+        echo "C# projects:" && find . -name "*.csproj" || true
+
+    # C++ 빌드
     - name: Build C++ files
       run: |
-        find . -name "*.cpp" | while read file; do
+        find DesignPattern -name "*.cpp" | while read file; do
           name=$(basename "$file" .cpp)
           g++ "$file" -o "build/${name}_cpp.out"
         done
 
-    # ==== Kotlin 빌드 ====
+    # Kotlin 빌드
     - name: Build Kotlin files
       run: |
-        find . -name "*.kt" | while read file; do
+        find DesignPattern -name "*.kt" | while read file; do
           name=$(basename "$file" .kt)
           kotlinc "$file" -include-runtime -d "build/${name}_kt.jar"
         done
 
-    # ==== C# 빌드 ====
+    # C# 빌드
     - name: Build C# projects
       run: |
-        find . -name "*.csproj" | while read proj; do
+        find DesignPattern -name "*.csproj" | while read proj; do
           dir=$(dirname "$proj")
           name=$(basename "$dir")
           dotnet publish "$proj" -c Release -o build/$name
         done
 
-    # ==== 미리 빌드된 .jar 복사 ====
+    # 기존 .jar 복사 (중복 제외)
     - name: Copy existing .jar files
       run: |
         find . -name "*.jar" | while read file; do
-          cp "$file" build/
+          dest="build/$(basename "$file")"
+          if [ "$file" != "$dest" ]; then
+            cp "$file" "$dest"
+          fi
         done
 
-    # ==== 압축 ====
+    # 압축
     - name: Zip build outputs
       run: zip -r build_artifacts.zip build/
 
-    # ==== GitHub 릴리즈 생성 ====
+    # GitHub 릴리즈 생성
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       if: github.event_name == 'push'
