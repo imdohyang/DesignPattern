@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Adapter/AdapterApp/AdapterApp.csproj": {}
+    "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Adapter/AdapterApp/AdapterApp.csproj": {}
   },
   "projects": {
-    "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Adapter/AdapterApp/AdapterApp.csproj": {
+    "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Adapter/AdapterApp/AdapterApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Adapter/AdapterApp/AdapterApp.csproj",
+        "projectUniqueName": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Adapter/AdapterApp/AdapterApp.csproj",
         "projectName": "AdapterApp",
-        "projectPath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Adapter/AdapterApp/AdapterApp.csproj",
+        "projectPath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Adapter/AdapterApp/AdapterApp.csproj",
         "packagesPath": "/home/dohyangim/.nuget/packages/",
-        "outputPath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Adapter/AdapterApp/obj/",
+        "outputPath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Adapter/AdapterApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/dohyangim/.nuget/NuGet/NuGet.Config"

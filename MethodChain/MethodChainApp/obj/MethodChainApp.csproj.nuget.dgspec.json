@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/MethodChain/MethodChainApp/MethodChainApp.csproj": {}
+    "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/MethodChain/MethodChainApp/MethodChainApp.csproj": {}
   },
   "projects": {
-    "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/MethodChain/MethodChainApp/MethodChainApp.csproj": {
+    "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/MethodChain/MethodChainApp/MethodChainApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/MethodChain/MethodChainApp/MethodChainApp.csproj",
+        "projectUniqueName": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/MethodChain/MethodChainApp/MethodChainApp.csproj",
         "projectName": "MethodChainApp",
-        "projectPath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/MethodChain/MethodChainApp/MethodChainApp.csproj",
+        "projectPath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/MethodChain/MethodChainApp/MethodChainApp.csproj",
         "packagesPath": "/home/dohyangim/.nuget/packages/",
-        "outputPath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/MethodChain/MethodChainApp/obj/",
+        "outputPath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/MethodChain/MethodChainApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/dohyangim/.nuget/NuGet/NuGet.Config"

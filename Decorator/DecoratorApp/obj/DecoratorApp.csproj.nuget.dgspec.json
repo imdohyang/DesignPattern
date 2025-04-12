@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Decorator/DecoratorApp/DecoratorApp.csproj": {}
+    "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Decorator/DecoratorApp/DecoratorApp.csproj": {}
   },
   "projects": {
-    "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Decorator/DecoratorApp/DecoratorApp.csproj": {
+    "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Decorator/DecoratorApp/DecoratorApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Decorator/DecoratorApp/DecoratorApp.csproj",
+        "projectUniqueName": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Decorator/DecoratorApp/DecoratorApp.csproj",
         "projectName": "DecoratorApp",
-        "projectPath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Decorator/DecoratorApp/DecoratorApp.csproj",
+        "projectPath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Decorator/DecoratorApp/DecoratorApp.csproj",
         "packagesPath": "/home/dohyangim/.nuget/packages/",
-        "outputPath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Decorator/DecoratorApp/obj/",
+        "outputPath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Decorator/DecoratorApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/dohyangim/.nuget/NuGet/NuGet.Config"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZEQhpwyoZ8qvAnhxusYSxopbE5w6346GANdpZIKoVacHPU3/w/e5qHSiqIFVF9A0z3MfBdTVVT7A9DVcTqeoaA==",
+  "dgSpecHash": "NkX60+5XW/+W/9vEgDg7aGRMxu+9hyx0W083qQjxsw75QUb2iNunNW8/F1JSNALrBE4IDL+UtTvFfnbiZ6VaAA==",
   "success": true,
-  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/FactoryMethod/FactoryMethodApp/FactoryMethodApp.csproj",
+  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/FactoryMethod/FactoryMethodApp/FactoryMethodApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

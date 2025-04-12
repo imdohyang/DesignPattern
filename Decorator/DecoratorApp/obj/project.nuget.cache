@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4FLf/eLnYNZzamTpoSYc84Qn1cOOn8WbHNr7BrhBLpf8rR22Qm7nVR6m9Krym4yH/oBi7GzdiTBOQPa/+12pcg==",
+  "dgSpecHash": "xsDa3sxM9BoFlEUjpCuS7y0o+NI2VhgwncnHB/ShA1tg0cQUHIpx6nNQNm4huzcVYvlzG6iVXKP7DPcy3qm7og==",
   "success": true,
-  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Decorator/DecoratorApp/DecoratorApp.csproj",
+  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Decorator/DecoratorApp/DecoratorApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

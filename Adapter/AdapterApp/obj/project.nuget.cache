@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EDfsUGI5WgXqfTKcFLFdl6Xct+5nu86zC4jLMqdW2AarMM22X4Y1vse+rexiRVrmJ2ig4qlb28s1v25NwXeCrA==",
+  "dgSpecHash": "jYib22pfmov8t5t7VA54Qd7HVd8HTKbm9fLFu020HRR37F7014uyQNr5CoSPpjivZXfYxKKt1FYjzYPt5BVXwA==",
   "success": true,
-  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Adapter/AdapterApp/AdapterApp.csproj",
+  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Adapter/AdapterApp/AdapterApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

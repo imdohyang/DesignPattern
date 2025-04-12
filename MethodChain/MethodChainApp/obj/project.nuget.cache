@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UFuVDh2ZeJQcpOdRgO+Wcneo2BslPFsbWl/TX9iTDlbZteQMdHk87lE3kCT2CgCKsvBg7RtMju5WeEi0wTuScA==",
+  "dgSpecHash": "ZDQYJKQ8fcfHOppW0wvKrk8m1eGFh3b+l6QQcJDpbAixjJcW5MB6Vf8AzCc1ULC+iDmLXxVMb74YoDZAUxKLGw==",
   "success": true,
-  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/MethodChain/MethodChainApp/MethodChainApp.csproj",
+  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/MethodChain/MethodChainApp/MethodChainApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

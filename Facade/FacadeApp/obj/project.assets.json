@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Facade/FacadeApp/FacadeApp.csproj",
+      "projectUniqueName": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Facade/FacadeApp/FacadeApp.csproj",
       "projectName": "FacadeApp",
-      "projectPath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Facade/FacadeApp/FacadeApp.csproj",
+      "projectPath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Facade/FacadeApp/FacadeApp.csproj",
       "packagesPath": "/home/dohyangim/.nuget/packages/",
-      "outputPath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Facade/FacadeApp/obj/",
+      "outputPath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Facade/FacadeApp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/dohyangim/.nuget/NuGet/NuGet.Config"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "htk9/bijHmSpTOzzaUeU3ERIh0itK1ro23Z034/06sRXBV0l7sCe2iTqs97DkyMEEHLVX+tG10td9PK32kf6Pw==",
+  "dgSpecHash": "LfS9MN2CrOO0joLRK9FY8li9b40hLVwTXO3Jj5iXR/ShmHTmwd5EvDRhl0had60jXz92UBGOiEkarWRwiRAJGA==",
   "success": true,
-  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Builder/BuilderApp/BuilderApp.csproj",
+  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Builder/BuilderApp/BuilderApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

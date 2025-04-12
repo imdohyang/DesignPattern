@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gUoBINfOInVz200mPE+thi3Fb0eW0DAnBBvwiy/WDFhnEItcPKZhNMxSW6kH8ZzpjrqJHJlcuJKI3e7Koe8vbw==",
+  "dgSpecHash": "BY8/5GeTvtT7YNecrReRvCaCPKW0Pv367pYU+7dTN+Jsnk8g0C4q0EbAJXT8LeDdZC44iqj+zDFbKSiu/ljeIw==",
   "success": true,
-  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/Facade/FacadeApp/FacadeApp.csproj",
+  "projectFilePath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/Facade/FacadeApp/FacadeApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

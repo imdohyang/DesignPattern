@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/FactoryMethod/FactoryMethodApp/FactoryMethodApp.csproj",
+      "projectUniqueName": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/FactoryMethod/FactoryMethodApp/FactoryMethodApp.csproj",
       "projectName": "FactoryMethodApp",
-      "projectPath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/FactoryMethod/FactoryMethodApp/FactoryMethodApp.csproj",
+      "projectPath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/FactoryMethod/FactoryMethodApp/FactoryMethodApp.csproj",
       "packagesPath": "/home/dohyangim/.nuget/packages/",
-      "outputPath": "/bce/lectures/2025-advanced-programming/202255173/week6/homework4/FactoryMethod/FactoryMethodApp/obj/",
+      "outputPath": "/bce/lectures/2025-advanced-programming/202255173/week6/DesignPattern/FactoryMethod/FactoryMethodApp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/dohyangim/.nuget/NuGet/NuGet.Config"

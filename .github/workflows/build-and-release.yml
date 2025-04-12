@@ -86,16 +86,6 @@ jobs:
           dotnet publish "$proj" -c Release -o build/$name
         done
 
-    # # 기존 .jar 복사 (중복 제외)
-    # - name: Copy existing .jar files
-    #   run: |
-    #     find . -name "*.jar" | while read file; do
-    #       dest="build/$(basename "$file")"
-    #       if [ "$file" != "$dest" ]; then
-    #         cp "$file" "$dest"
-    #       fi
-    #     done
-
     # 압축
     - name: Zip build outputs
       run: zip -r build_artifacts.zip build/
