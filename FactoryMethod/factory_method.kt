@@ -16,7 +16,7 @@ class Cat : Animal {
 // AnimalFactory 클래스
 class AnimalFactory {
     fun createAnimal(type: String): Animal? {
-        return when (type.toLowerCase()) {
+        return when (type.lowercase()) {
             "dog" -> Dog()
             "cat" -> Cat()
             else -> null
