@@ -26,7 +26,7 @@ jobs:
     - name: Create build folder
       run: mkdir -p build
 
-    # ==== C++ 빌드 ====
+    # C++ 빌드
     - name: Build C++ files
       run: |
         find DesignPattern -name "*.cpp" | while read file; do
@@ -34,7 +34,7 @@ jobs:
           g++ "$file" -o "build/${name}_cpp.out"
         done
 
-    # ==== Kotlin 빌드 ====
+    # Kotlin 빌드
     - name: Build Kotlin files
       run: |
         find DesignPattern -name "*.kt" | while read file; do
@@ -42,7 +42,7 @@ jobs:
           kotlinc "$file" -include-runtime -d "build/${name}_kt.jar"
         done
 
-    # ==== C# 빌드 ====
+    # C# 빌드
     - name: Build C# projects
       run: |
         find DesignPattern -name "*.csproj" | while read proj; do
@@ -51,23 +51,21 @@ jobs:
           dotnet publish "$proj" -c Release -o build/$name
         done
 
-    # ==== 미리 빌드된 JAR 복사 ====
-    - name: Copy existing .jar files
+    # 기존 .jar 복사
+    - name: Copy prebuilt JARs
       run: |
         find DesignPattern -name "*.jar" | while read file; do
           cp "$file" build/
         done
 
-    # ==== zip 압축 ====
-    - name: Zip build outputs
+    - name: Zip build result
       run: zip -r build_artifacts.zip build/
 
-    # ==== GitHub 릴리즈 생성 ====
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       if: github.event_name == 'push'
       with:
-        name: Auto Release - ${{ github.sha }}
+        name: Auto Release ${{ github.run_number }}
         tag_name: release-${{ github.run_number }}
         files: build_artifacts.zip
       env:
