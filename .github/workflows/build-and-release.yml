@@ -19,11 +19,12 @@ jobs:
       run: |
         sudo apt update
 
-        # Check and install g++
-        if ! command -v g++ &> /dev/null; then
-          echo "Installing g++..."
-          sudo apt install -y g++
+        # Install g++-9 and use it as default
+        if ! command -v g++-9 &> /dev/null; then
+          echo "Installing g++-9..."
+          sudo apt install -y g++-9
         fi
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 90
 
         # Check and install zip
         if ! command -v zip &> /dev/null; then
@@ -61,7 +62,7 @@ jobs:
         echo "Kotlin files:" && find . -name "*.kt" || true
         echo "C# projects:" && find . -name "*.csproj" || true
 
-    # C++ 빌드
+    # C++ 빌드 (g++-9 사용)
     - name: Build C++ files
       run: |
         find -name "*.cpp" | while read file; do
