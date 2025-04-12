@@ -1,0 +1,77 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y g++ zip openjdk-17-jdk
+        sudo snap install dotnet-sdk --classic
+        sudo ln -s /snap/dotnet-sdk/current/dotnet /usr/bin/dotnet
+
+    - name: Set up Kotlin
+      uses: fwcd/setup-kotlin@v1
+      with:
+        version: 1.8.10
+
+    - name: Create build folder
+      run: mkdir -p build
+
+    # ==== C++ ====
+    - name: Build C++ files
+      run: |
+        find DesignPattern -name "*.cpp" | while read file; do
+          name=$(basename "$file" .cpp)
+          g++ "$file" -o "build/${name}_cpp.out"
+        done
+
+    # ==== Kotlin ====
+    - name: Build Kotlin files
+      run: |
+        find DesignPattern -name "*.kt" | while read file; do
+          name=$(basename "$file" .kt)
+          kotlinc "$file" -include-runtime -d "build/${name}_kt.jar"
+        done
+
+    # ==== C# ====
+    - name: Build C# .csproj apps
+      run: |
+        find DesignPattern -name "*.csproj" | while read proj; do
+          dir=$(dirname "$proj")
+          name=$(basename "$dir")
+          dotnet publish "$proj" -c Release -o build/$name
+        done
+
+    # ==== Prebuilt .jar 복사 ====
+    - name: Copy existing .jar
+      run: |
+        find DesignPattern -name "*.jar" | while read file; do
+          cp "$file" build/
+        done
+
+    # ==== 압축 ====
+    - name: Zip build outputs
+      run: zip -r build_artifacts.zip build/
+
+    # ==== 릴리즈 ====
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      if: github.event_name == 'push'
+      with:
+        name: Auto Release - ${{ github.sha }}
+        tag_name: release-${{ github.run_number }}
+        files: build_artifacts.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
