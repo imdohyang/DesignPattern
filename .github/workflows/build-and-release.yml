@@ -65,7 +65,7 @@ jobs:
     # C++ 빌드 (Eigen 포함 여부 확인)
     - name: Build C++ files with optional Eigen
       run: |
-        EIGEN_PATH="~/micromamba/envs/python313/include/eigen3"
+        EIGEN_PATH="$HOME/micromamba/envs/python313/include/eigen3"
         find . -name "*.cpp" | while read file; do
           name=$(basename "$file" .cpp)
           if grep -q "#include <Eigen/" "$file"; then
