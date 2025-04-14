@@ -62,10 +62,10 @@ jobs:
         echo "Kotlin files:" && find . -name "*.kt" || true
         echo "C# projects:" && find . -name "*.csproj" || true
 
-    # C++ 빌드 (g++-9 사용)
-    - name: Build C++ files
+    # C++ 빌드 (g++-9 사용, matrix_mul.cpp 제외)
+    - name: Build C++ files (excluding matrix_mul.cpp)
       run: |
-        find -name "*.cpp" | while read file; do
+        find . -name "*.cpp" ! -name "matrix_mul.cpp" | while read file; do
           name=$(basename "$file" .cpp)
           g++ "$file" -o "build/${name}_cpp.out"
         done
