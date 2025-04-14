@@ -84,8 +84,9 @@ jobs:
         find -name "*.csproj" | while read proj; do
           dir=$(dirname "$proj")
           name=$(basename "$dir")
-          dotnet publish "$proj" -c Release -o build/$name
+          dotnet publish "$proj" -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -o build/$name
         done
+
 
     # 압축
     - name: Zip build outputs
