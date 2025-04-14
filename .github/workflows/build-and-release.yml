@@ -62,19 +62,12 @@ jobs:
         echo "Kotlin files:" && find . -name "*.kt" || true
         echo "C# projects:" && find . -name "*.csproj" || true
 
-    # C++ 빌드 (Eigen 포함 여부 확인)
-    - name: Build C++ files with optional Eigen
+    # C++ 빌드 (g++-9 사용, matrix_mul.cpp 제외)
+    - name: Build C++ files (excluding matrix_mul.cpp)
       run: |
-        EIGEN_PATH="$HOME/micromamba/envs/python313/include/eigen3"
-        find . -name "*.cpp" | while read file; do
+        find . -name "*.cpp" ! -name "matrix_mul.cpp" | while read file; do
           name=$(basename "$file" .cpp)
-          if grep -q "#include <Eigen/" "$file"; then
-            echo "Compiling $file with Eigen include path"
-            g++ "$file" -I"$EIGEN_PATH" -o "build/${name}_cpp.out"
-          else
-            echo "Compiling $file without Eigen include path"
-            g++ "$file" -o "build/${name}_cpp.out"
-          fi
+          g++ "$file" -o "build/${name}_cpp.out"
         done
 
     # Kotlin 빌드
@@ -94,6 +87,7 @@ jobs:
           dotnet publish "$proj" -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -o build/$name
         done
 
+
     # 압축
     - name: Zip build outputs
       run: zip -r build_artifacts.zip build/
@@ -108,3 +102,5 @@ jobs:
         files: build_artifacts.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        
