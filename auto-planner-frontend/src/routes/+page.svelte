@@ -1,5 +1,8 @@
 <script>
-  // 동작 없음 (디자인용)
+import { UserRound } from 'lucide-svelte';
+
+let userId = '';
+let password = '';
 </script>
 
 <style>
@@ -36,10 +39,15 @@
     text-align: center;
   }
 
-  .login-box img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 1rem;
+  .icon-wrapper {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background-color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
   }
 
   .login-box h2 {
@@ -53,6 +61,13 @@
     margin-bottom: 1.5rem;
   }
 
+  .login-box label {
+    display: block;
+    text-align: left;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
   input[type="text"], input[type="password"] {
     width: 100%;
     padding: 0.5rem;
@@ -61,10 +76,13 @@
     border-radius: 4px;
   }
 
+  input::placeholder {
+    color: #adaebc;
+  }
+
   .options {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-end;
     font-size: 0.875rem;
     margin-bottom: 1rem;
   }
@@ -107,21 +125,23 @@
   </div>
   <div class="content">
     <div class="login-box">
-      <img src="https://www.svgrepo.com/show/382106/profile-user.svg" alt="user icon" />
+      <div class="icon-wrapper">
+        <UserRound size={60} stroke="#6b7280" />
+      </div>
+
       <h2>환영합니다</h2>
       <p>AutoPlanner에 로그인 하세요</p>
 
       <div>
         <label>아이디</label>
-        <input type="text" placeholder="아이디를 입력하세요" />
+        <input type="text" bind:value={userId} placeholder="아이디를 입력하세요" />
       </div>
       <div>
         <label>비밀번호</label>
-        <input type="password" placeholder="비밀번호를 입력하세요" />
+        <input type="password" bind:value={password} placeholder="비밀번호를 입력하세요" />
       </div>
 
       <div class="options">
-        <label><input type="checkbox" /> 로그인 상태 유지</label>
         <span style="cursor:pointer; text-decoration: underline; color: #1f2937;">비밀번호 찾기</span>
       </div>
 
