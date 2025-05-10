@@ -118,7 +118,7 @@ let password = '';
   }
 </style>
 
-<div class="wrapper">
+<div class="wrapper"> 
   <div class="header">
     <img src="/favicon.png" alt="logo" width="24" height="24" />
     AutoPlanner
@@ -154,4 +154,4 @@ let password = '';
       </div>
     </div>
   </div>
-</div>
+</div> 
